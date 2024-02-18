@@ -1,8 +1,9 @@
+using Player.Controller;
 using UnityEngine;
 
-namespace Player.Controller
+namespace Player.Camera
 {
-    public class PlayerRotation : MonoBehaviour
+    public class CameraRotation : MonoBehaviour
     {
         [Header("Sensetivity Value")]
         [SerializeField] private float _mouseSensetivity;
@@ -12,14 +13,14 @@ namespace Player.Controller
         [SerializeField] private Vector2 _minMaxVerticalAngle;
 
         [Header("Player Rotation Object")]
-        [SerializeField] private Transform _playerCamera;
-        [SerializeField] private Transform _playerTransform;
+        [SerializeField] private PlayerRotation _playerRotation;
 
         private float _xRotation;
         private float _yRotation;
 
         private PlayerInputs _playerInputs;
 
+        #region [Initialization]
         private void Awake()
         {
             _playerInputs = new PlayerInputs();
@@ -34,17 +35,11 @@ namespace Player.Controller
         {
             _playerInputs.Disable();
         }
+        #endregion
 
         private void Update()
         {
-            CameraBinding();
             Rotation();
-        }
-
-        private void CameraBinding()
-        {
-            _playerCamera.position = transform.position;
-            _playerCamera.localRotation = transform.rotation;
         }
 
         private void Rotation()
@@ -60,13 +55,7 @@ namespace Player.Controller
 
             transform.localRotation = Quaternion.Euler(_xRotation, _yRotation, 0);
 
-            var yRotation = transform.localEulerAngles.y;
-            var repeatAngle = Mathf.Repeat(180f + yRotation, 360f) - 180f;
-
-            if (Mathf.Abs(repeatAngle) >= _minMaxVerticalAngle.y)
-            {
-                _playerTransform.Rotate(Vector3.up * scaleRotation.x);
-            }
+            _playerRotation.Rotation(transform.localEulerAngles.y, _minMaxVerticalAngle.y, scaleRotation.x, inputsRotation.x);
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5274172229959188494}
   - component: {fileID: 5274172229959188493}
   m_Layer: 0
-  m_Name: KatanaWeapon
+  m_Name: Katana_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

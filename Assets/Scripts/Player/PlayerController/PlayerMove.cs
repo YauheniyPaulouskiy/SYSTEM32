@@ -1,8 +1,10 @@
+using Player.Animation;
 using UnityEngine;
 
 namespace Player.Controller
 {
     [RequireComponent(typeof(CharacterController))]
+    [RequireComponent (typeof(PlayerMoveAnimation))]
     public class PlayerMove : MonoBehaviour
     {
         [Header("Player Speed Value")]
@@ -14,13 +16,18 @@ namespace Player.Controller
         [Header("Player Character Controller")]
         [SerializeField] private CharacterController _playerCharacterController;
 
+        [Header("Animation Scripts")]
+        [SerializeField] private PlayerMoveAnimation _playerMoveAnimation;
+
         private float _speed;
 
         private PlayerInputs _playerInputs;
 
+        #region [Initialization]
         private void Awake()
         {
             _playerCharacterController = GetComponent<CharacterController>();
+            _playerMoveAnimation = GetComponent<PlayerMoveAnimation>();
             _playerInputs = new PlayerInputs();
         } 
 
@@ -33,6 +40,7 @@ namespace Player.Controller
         {
             _playerInputs.Disable();
         }
+        #endregion
 
         private void Update()
         {
