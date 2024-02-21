@@ -55,7 +55,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SitDown"",
+                    ""name"": ""Sitdown"",
                     ""type"": ""Button"",
                     ""id"": ""9cf3e6b9-b301-45d1-9fe2-c67089a36c68"",
                     ""expectedControlType"": ""Button"",
@@ -330,7 +330,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""SitDown"",
+                    ""action"": ""Sitdown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -341,7 +341,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""SitDown"",
+                    ""action"": ""Sitdown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -427,7 +427,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Rotation = m_Player.FindAction("Rotation", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_SitDown = m_Player.FindAction("SitDown", throwIfNotFound: true);
+        m_Player_Sitdown = m_Player.FindAction("Sitdown", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
@@ -495,7 +495,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Rotation;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_SitDown;
+    private readonly InputAction m_Player_Sitdown;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Dash;
@@ -506,7 +506,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Rotation => m_Wrapper.m_Player_Rotation;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @SitDown => m_Wrapper.m_Player_SitDown;
+        public InputAction @Sitdown => m_Wrapper.m_Player_Sitdown;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
@@ -528,9 +528,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @SitDown.started += instance.OnSitDown;
-            @SitDown.performed += instance.OnSitDown;
-            @SitDown.canceled += instance.OnSitDown;
+            @Sitdown.started += instance.OnSitdown;
+            @Sitdown.performed += instance.OnSitdown;
+            @Sitdown.canceled += instance.OnSitdown;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -553,9 +553,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @SitDown.started -= instance.OnSitDown;
-            @SitDown.performed -= instance.OnSitDown;
-            @SitDown.canceled -= instance.OnSitDown;
+            @Sitdown.started -= instance.OnSitdown;
+            @Sitdown.performed -= instance.OnSitdown;
+            @Sitdown.canceled -= instance.OnSitdown;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -605,7 +605,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnSitDown(InputAction.CallbackContext context);
+        void OnSitdown(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);

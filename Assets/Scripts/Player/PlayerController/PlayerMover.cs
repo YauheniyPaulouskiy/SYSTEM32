@@ -6,7 +6,7 @@ namespace Player.Controller
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent (typeof(PlayerMoveAnimation))]
-    public class PlayerMover : MonoBehaviour, IUseStamina
+    public class PlayerMover : MonoBehaviour
     {
         [Header("Speed Value")]
         [SerializeField] private float _initialFrontSpeed;
@@ -32,8 +32,6 @@ namespace Player.Controller
         private PlayerInputs _playerInputs;
         private PlayerMoveAnimation _playerMoveAnimation;
 
-        private static Action<float> _useStamina;
-
         #region [Initialization]
         private void Awake()
         {
@@ -56,7 +54,6 @@ namespace Player.Controller
         private void FixedUpdate()
         {
             ApplayGround();
-            Dash();
         }
 
         private void ApplayGround()
@@ -95,16 +92,6 @@ namespace Player.Controller
             {
                 _rb.AddForce(Vector3.up * _jumpForce * _rb.mass, ForceMode.Impulse);
             }
-        }
-
-        private void Dash()
-        {
-            UseStamina();
-        }
-
-        private void UseStamina()
-        {
-            _useStamina.Invoke(_decreasedStamina);
         }
 
         private void ChangeSpeed(Vector2 inputsDirection)

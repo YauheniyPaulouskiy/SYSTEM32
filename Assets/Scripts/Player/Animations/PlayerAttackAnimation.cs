@@ -3,9 +3,8 @@ using UnityEngine;
 namespace Player.Animation
 {
     [RequireComponent(typeof(Animator))]
-    public class PlayerMoveAnimation : MonoBehaviour
+    public class PlayerAttackAnimation : MonoBehaviour
     {
-        [Header("Animation Objects")]
         private Animator _playerAnimator;
 
         #region [Initialization]
@@ -15,10 +14,9 @@ namespace Player.Animation
         }
         #endregion
 
-        public void MoveAnimation(Vector2 moveDirection)
+        public void AttackAnimation()
         {
-            _playerAnimator.SetFloat("Vertical", moveDirection.x);
-            _playerAnimator.SetFloat("Horizontal", moveDirection.y);
+            _playerAnimator.SetTrigger("Attack");
         }
     }
 }

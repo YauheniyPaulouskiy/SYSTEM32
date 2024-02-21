@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Player.Camera
 {
-    [RequireComponent(typeof(UnityEngine.Camera))]
     public class CameraBinding : MonoBehaviour
     {
         [Header("Binding Point")]

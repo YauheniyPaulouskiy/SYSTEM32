@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SitDown",
+                    "name": "Sitdown",
                     "type": "Button",
                     "id": "9cf3e6b9-b301-45d1-9fe2-c67089a36c68",
                     "expectedControlType": "Button",
@@ -308,7 +308,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "SitDown",
+                    "action": "Sitdown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -319,7 +319,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
-                    "action": "SitDown",
+                    "action": "Sitdown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
