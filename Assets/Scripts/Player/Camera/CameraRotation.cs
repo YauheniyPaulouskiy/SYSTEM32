@@ -10,13 +10,11 @@ namespace Player.Camera
 
         [Header("Min/Max Rotation Angle")]
         [SerializeField] private Vector2 _minMaxHorizontalAngle;
-        [SerializeField] private Vector2 _minMaxVerticalAngle;
 
         [Header("Player Rotation Object")]
         [SerializeField] private PlayerRotation _playerRotation;
 
         private float _xRotation;
-        private float _yRotation;
 
         private PlayerInputs _playerInputs;
 
@@ -50,12 +48,9 @@ namespace Player.Camera
             _xRotation -= scaleRotation.y;
             _xRotation = Mathf.Clamp(_xRotation, _minMaxHorizontalAngle.x, _minMaxHorizontalAngle.y);
 
-            _yRotation += scaleRotation.x;
-            _yRotation = Mathf.Clamp(_yRotation, _minMaxVerticalAngle.x, _minMaxVerticalAngle.y);
+            transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
 
-            transform.localRotation = Quaternion.Euler(_xRotation, _yRotation, 0);
-
-            _playerRotation.Rotation(transform.localEulerAngles.y, _minMaxVerticalAngle.y, scaleRotation.x, inputsRotation.x);
+            _playerRotation.Rotation(scaleRotation.x);
         }
     }
 }

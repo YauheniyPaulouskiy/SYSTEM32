@@ -15,9 +15,10 @@ namespace Player.Animation
         }
         #endregion
 
-        public void Move()
+        public void MoveAnimation(Vector2 moveDirection)
         {
-            
+            _playerAnimator.SetFloat("Vertical", moveDirection.x);
+            _playerAnimator.SetFloat("Horizontal", moveDirection.y);
         }
     }
 }

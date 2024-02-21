@@ -1,5 +1,5 @@
 {
-    "name": "PlayerController",
+    "name": "PlayerInputs",
     "maps": [
         {
             "name": "Player",
@@ -51,9 +51,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drop/Equip",
+                    "name": "Block",
                     "type": "Button",
-                    "id": "4f3dfa44-7502-4954-8352-64b0180d2032",
+                    "id": "2b15ab37-4cc7-4dcb-b64d-56ff583be0b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "f7a4ab18-6356-46ab-b1ae-ddffc4e8de2f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -97,33 +106,11 @@
                 {
                     "name": "",
                     "id": "40f9e375-a94b-4d1c-aae6-3f8d8992b769",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7452f747-d059-4253-9bfe-05b2172b9550",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse and Keyboard",
-                    "action": "Drop/Equip",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9764c17d-d510-4c1d-858f-c0e29eb26a41",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Drop/Equip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -333,6 +320,50 @@
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "SitDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9eb794f1-7cc0-40d0-bcc8-11d8fb7d3f85",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d853b9a-ce59-434f-b7a3-6894666f036d",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "321b9589-2256-4edd-bfe9-80884f1ba634",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f858bf0e-13d9-47e5-a953-64ab1cfcf737",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

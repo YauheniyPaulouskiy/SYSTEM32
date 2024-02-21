@@ -8,14 +8,14 @@ namespace Player.Camera
         [Header("Binding Point")]
         [SerializeField] private Transform _cameraBindingPoint;
 
-        private void Update()
+        private void LateUpdate()
         {
             Binding();
         }
 
         private void Binding()
         {
-            transform.position = _cameraBindingPoint.position;
+            transform.transform.position = _cameraBindingPoint.position;
             transform.localRotation = _cameraBindingPoint.rotation;
         }
     }
