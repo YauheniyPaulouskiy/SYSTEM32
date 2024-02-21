@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerAttackAnimation))]
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Sword Trigger")]
     [SerializeField] private BoxCollider _swordTriggerZone;
 
     private PlayerInputs _palayerInputs;

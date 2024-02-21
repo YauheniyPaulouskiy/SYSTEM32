@@ -1,33 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class EnemyDeath : MonoBehaviour
+namespace Enemy.Death
 {
-    private IEnemyDeath[] _enemyDeathConditions;
-
-    #region [Initialization]
-    private void Awake()
+    public class EnemyDeath : MonoBehaviour
     {
-        _enemyDeathConditions = GetComponents<IEnemyDeath>();
-    }
-    #endregion
+        private IEnemyDeath[] _enemyDeathConditions;
 
-    private void Start()
-    {
-        SubscribeToIDeath();
-    }
+        public UnityEvent<EnemyDeath> DeathEnemy;
 
-    private void SubscribeToIDeath()
-    {
-        foreach (var enemyDeath in _enemyDeathConditions) 
+        #region [Initialization]
+        private void Awake()
         {
-            enemyDeath.EnemyDeath += Death;
+            _enemyDeathConditions = GetComponents<IEnemyDeath>();
         }
-    }
+        #endregion
 
-    private void Death()
-    {
-        Debug.Log("Enemy Death");
+        private void Start()
+        {
+            SubscribeToIDeath();
+        }
+
+        private void SubscribeToIDeath()
+        {
+            foreach (var enemyDeath in _enemyDeathConditions)
+            {
+                enemyDeath.EnemyDeath += Death;
+            }
+        }
+
+        private void Death()
+        {
+            DeathEnemy.Invoke(this);
+        }
     }
 }

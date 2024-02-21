@@ -1,9 +1,11 @@
 using System;
-using UnityEngine;
 
-public interface IEnemyDeath
+namespace Enemy.Death
 {
-    public event Action EnemyDeath;
+    public interface IEnemyDeath
+    {
+        public event Action EnemyDeath;
 
-    public void OnDeath();
+        public void OnDeath();
+    }
 }

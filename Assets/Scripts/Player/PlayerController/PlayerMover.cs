@@ -1,5 +1,4 @@
 using Player.Animation;
-using System;
 using UnityEngine;
 
 namespace Player.Controller

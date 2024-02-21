@@ -1,22 +1,23 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponEnemyDeath : MonoBehaviour, IEnemyDeath
+namespace Enemy.Death
 {
-    public event Action EnemyDeath;
-
-    private void OnTriggerEnter(Collider other)
+    public class WeaponEnemyDeath : MonoBehaviour, IEnemyDeath
     {
-        if (other.transform.CompareTag("Weapon"))
+        public event Action EnemyDeath;
+
+        private void OnTriggerEnter(Collider other)
         {
-            OnDeath();
+            if (other.transform.CompareTag("Weapon"))
+            {
+                OnDeath();
+            }
         }
-    }
 
-    public void OnDeath()
-    {
-        EnemyDeath?.Invoke();
+        public void OnDeath()
+        {
+            EnemyDeath?.Invoke();
+        }
     }
 }
