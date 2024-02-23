@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - ship
+  - asteroid
+  - EnemyWeapon
+  - PlayerWeapon
   - Weapon
   layers:
   - Default
@@ -14,7 +18,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - UI.Button
   - 
   - 
   - Ground
