@@ -7,6 +7,8 @@ public class PlayerAttack : MonoBehaviour
     [Header("Sword Trigger")]
     [SerializeField] private BoxCollider _swordTriggerZone;
 
+    private bool _isAttack = false;
+
     private PlayerInputs _palayerInputs;
     private PlayerAttackAnimation _playerAttackAnimation;
 
@@ -32,12 +34,27 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
-        _swordTriggerZone.enabled = false;
+        EnableTriggerZone(_isAttack);
     }
 
+//Bug
     private void Attack()
     {
-        _swordTriggerZone.enabled = true;
-        _playerAttackAnimation.AttackAnimation();
+        if (!_isAttack) 
+        {
+            Debug.Log("Attack");
+            _isAttack = true;
+            EnableTriggerZone(_isAttack);
+            _swordTriggerZone.enabled = true;
+            _playerAttackAnimation.AttackAnimation();
+            return;
+        }
+        _isAttack = false;
+        EnableTriggerZone(_isAttack);
+    }
+
+    private void EnableTriggerZone(bool isAttack)
+    {
+        _swordTriggerZone.enabled = isAttack;
     }
 }

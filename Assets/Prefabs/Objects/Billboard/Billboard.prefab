@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7928329157040826409}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Billboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6173832863551011453}
   - component: {fileID: 6445773537610553790}
   - component: {fileID: 2348452801933534172}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BoardVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

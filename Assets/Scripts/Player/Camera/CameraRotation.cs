@@ -1,5 +1,6 @@
 using Player.Controller;
 using UnityEngine;
+using Zenject;
 
 namespace Player.Camera
 {
@@ -33,6 +34,7 @@ namespace Player.Camera
         {
             _playerInputs.Disable();
         }
+
         #endregion
 
         private void Update()
