@@ -68,6 +68,7 @@ namespace Enemy.AI
         {
             if (PauseGame.instance._isPaused)
             {
+                _enemyAgent.SetDestination(transform.position);
                 return;
             }
 
