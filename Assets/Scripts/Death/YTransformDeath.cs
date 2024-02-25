@@ -16,6 +16,7 @@ namespace Death
         {
             if (transform.position.y == -10f)
             {
+                Debug.Log(1);
                 OnDeath();
             }
         }

@@ -137,6 +137,8 @@ namespace Enemy.AI
         {
             _isDeath = true;
 
+            ActivateTriggerZone(false);
+
             _enemyAnimation.DeathAnimation();
 
             DeathEnemyScore?.Invoke();
