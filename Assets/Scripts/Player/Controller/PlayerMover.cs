@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Player.Controller
 {
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent (typeof(CapsuleCollider))]
     [RequireComponent (typeof(PlayerAnimation))]
     public class PlayerMover : MonoBehaviour
     {
@@ -26,6 +27,7 @@ namespace Player.Controller
 
         private float _speed;
         private float _playerMass;
+        private float _playerRadius;
         private Vector3 _scaleDirection;     
         private bool _onGround;
 
@@ -57,6 +59,7 @@ namespace Player.Controller
         private void Start()
         {
             _playerMass = _rigidbody.mass;
+            _playerRadius = gameObject.GetComponent<CapsuleCollider>().radius;
         }
 
         private void FixedUpdate()

@@ -8,8 +8,6 @@ namespace Player.Animation
     [RequireComponent(typeof(Animator))]
     public class PlayerAnimation : MonoBehaviour, IPausedHandler
     {
-        [Header("PostProcessing Volume")]
-        [SerializeField] private Volume _volume;
 
         private Animator _playerAnimator;
 
@@ -40,12 +38,6 @@ namespace Player.Animation
         public void AttackAnimation()
         {          
             _playerAnimator.SetTrigger("Attack");
-        }
-
-        public void HealthAnimation(float health)
-        {
-            _volume.profile.TryGet(out Vignette viggnet);
-            viggnet.intensity.value -= (health / 10);
         }
 
         public void IsPaused(bool isPaused)

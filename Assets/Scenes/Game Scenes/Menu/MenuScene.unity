@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17212424, g: 0.20595889, b: 0.24549757, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -161,6 +161,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -128.00003}
   m_SizeDelta: {x: 0, y: 952}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &129406267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 129406268}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &129406268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129406267}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.348253, y: -21.248856, z: 51.37302}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 788291753}
+  - {fileID: 440082562}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &145588353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -711,13 +744,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440082559}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -17.348253, y: 21.248856, z: -51.37302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 129406268}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &440082563
 MonoBehaviour:
@@ -793,6 +826,87 @@ Transform:
   m_Father: {fileID: 1174988095}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &788291752
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 129406268}
+    m_Modifications:
+    - target: {fileID: 8630025935791621202, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.348253
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21.248856
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -51.37302
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630025935791621205, guid: abc8797b072630b409d37e0a37805437,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c009f1ab2084a94fa97c9936f7a64fd, type: 3}
+    m_RemovedComponents:
+    - {fileID: 3685731992289137223, guid: abc8797b072630b409d37e0a37805437, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: abc8797b072630b409d37e0a37805437, type: 3}
+--- !u!4 &788291753 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8630025935791621204, guid: abc8797b072630b409d37e0a37805437,
+    type: 3}
+  m_PrefabInstance: {fileID: 788291752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1079042064
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,7 +1053,7 @@ LightingSettings:
   serializedVersion: 4
   m_GIWorkflowMode: 1
   m_EnableBakedLightmaps: 1
-  m_EnableRealtimeLightmaps: 0
+  m_EnableRealtimeLightmaps: 1
   m_RealtimeEnvironmentLighting: 1
   m_BounceScale: 1
   m_AlbedoBoost: 1
@@ -950,7 +1064,7 @@ LightingSettings:
   m_BakeResolution: 40
   m_Padding: 2
   m_LightmapCompression: 3
-  m_AO: 0
+  m_AO: 1
   m_AOMaxDistance: 1
   m_CompAOExponent: 1
   m_CompAOExponentDirect: 0

@@ -52,7 +52,6 @@ namespace Player.Death
             _hp += 1;
 
             isDeath();
-            _playerAnimation.HealthAnimation(_changeHp);
         }
 
         private void DecreaseHealth()
@@ -61,8 +60,6 @@ namespace Player.Death
 
             StartAndStopRutine();
             isDeath();
-
-            _playerAnimation.HealthAnimation(-_changeHp);
         }
 
         private void isDeath()
