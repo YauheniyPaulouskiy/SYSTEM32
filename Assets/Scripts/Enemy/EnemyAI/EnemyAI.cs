@@ -6,13 +6,19 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using Player.Controller;
 using System.Collections;
+using GameManager.PauseGame;
 
 namespace Enemy.AI
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyAI : MonoBehaviour
     {
-        [SerializeField] private float timer;
+        [Header("Raycast Value")]
+        [SerializeField] private float _maxDistanceFromPlayer;
+        [SerializeField] private float _originOffset;
+
+        [Header("Timer Value")]
+        [SerializeField] private float _timerSeconds;
 
         [Header("Target Move")]
         [SerializeField] private PlayerMover _player;
@@ -20,40 +26,29 @@ namespace Enemy.AI
         [Header("Sword Trigger")]
         [SerializeField] private BoxCollider _swordTriggerZone;
 
+        [Header("Player Mask")]
+        [SerializeField] private LayerMask _playerMask;
+
         private bool _isMove = true;
-        private bool _isAttack = false;
         private bool _isDeath = false;
+        private bool _isPlayer;
 
         private NavMeshAgent _enemyAgent;
 
         private EnemyAnimation _enemyAnimation;
-        private EnemyRagdoll _enemyRagdoll;
 
         private IDeath[] _enemyDeathConditions;
 
         [HideInInspector]
         public UnityEvent<EnemyAI> DeathEnemy;
+        public UnityEvent DeathEnemyScore;
 
         #region [Initialization]
         private void Awake()
         {
             _enemyAgent = GetComponent<NavMeshAgent>();
             _enemyDeathConditions = GetComponents<IDeath>();
-            _enemyRagdoll = GetComponent<EnemyRagdoll>();
             _enemyAnimation = GetComponent<EnemyAnimation>();
-        }
-        #endregion
-
-        private void Start()
-        {
-            EnableTriggerZone(_isAttack);
-            SubscribeToIDeath();
-        }
-
-        private void Update()
-        {
-            Move();
-            Attack();  
         }
 
         [Inject]
@@ -61,10 +56,38 @@ namespace Enemy.AI
         {
             _player = player;
         }
+        #endregion
+
+        private void Start()
+        {
+            SubscribeToIDeath();
+            ActivateTriggerZone(false);
+        }
+
+        private void Update()
+        {
+            if (PauseGame.instance._isPaused)
+            {
+                return;
+            }
+
+            Move();
+            StartAttack();  
+        }
+
+        private void FixedUpdate()
+        {
+            if (PauseGame.instance._isPaused)
+            {
+                return;
+            }
+
+            PlayerCheck();
+        }
 
         private void Move()
         {
-            if (!_isAttack && !_isDeath)
+            if (!_isDeath)
             {
                 _isMove = true;
                 _enemyAgent.SetDestination(_player.transform.position);
@@ -77,34 +100,47 @@ namespace Enemy.AI
             _enemyAnimation.MoveAnimation(_isMove);
         }
 
-        private void Attack()
-        {
-            var playerDistance = Vector3.Distance(_player.transform.position, transform.position);
-            if (playerDistance < _enemyAgent.stoppingDistance && !_isAttack && !_isDeath)
+        private void StartAttack()
+        {          
+            if (_isPlayer && !_isDeath)
             {
-                _isAttack = true;
-                EnableTriggerZone(_isAttack);
+                ActivateTriggerZone(true);
+
                 _enemyAnimation.AttackAnimation();
-                return;
-            }
-            else
-            {
-                _isAttack = false;
             }     
-            
-            EnableTriggerZone(_isAttack);
         }
 
-        private void EnableTriggerZone(bool isAttack)
+        private void EndAttack()
+        {
+            ActivateTriggerZone(false);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                ActivateTriggerZone(false);
+            }
+        }
+
+        private void ActivateTriggerZone(bool isAttack)
         {
             _swordTriggerZone.enabled = isAttack;
         }
 
+        public void StandUp()
+        {
+            _enemyAnimation.RespawnAnimation();
+        }
+
         private void Death()
         {
-            _enemyAnimation.SetAnimator().enabled = false;
-            _enemyRagdoll.Enable();
             _isDeath = true;
+
+            _enemyAnimation.DeathAnimation();
+
+            DeathEnemyScore?.Invoke();
+
             StartCoroutine(DeathTime());
         }
 
@@ -121,16 +157,21 @@ namespace Enemy.AI
             _isDeath = isDeath;
         }
 
-        public void StandUp()
+        private void PlayerCheck()
         {
-            _enemyRagdoll.Disable();
-            _enemyAnimation.SetAnimator().enabled = true;
+            var curPosition = transform.position;
+            curPosition.y += _originOffset;
+            var direction = transform.forward;
+
+            _isPlayer = Physics.Raycast(curPosition, direction, _maxDistanceFromPlayer, _playerMask);
         }
 
+        #region [Timer]
         private IEnumerator DeathTime()
         {
-            yield return new WaitForSeconds(timer);
+            yield return new WaitForSeconds(_timerSeconds);
             DeathEnemy.Invoke(this);
         }
+        #endregion
     }  
 }

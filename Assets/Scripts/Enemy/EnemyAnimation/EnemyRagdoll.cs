@@ -7,13 +7,31 @@ namespace Enemy.Animation
     {
         private List<Rigidbody> rigidbodies;
 
+        #region [Initialization]
         private void Awake()
         {
             rigidbodies = new List<Rigidbody>(GetComponentsInChildren<Rigidbody>());
+        }
+        #endregion
+
+        private void Start()
+        {
             Disable();
         }
 
-        public void Enable()
+        public void IsActivate(bool isActivate)
+        {
+            if (isActivate)
+            {
+                Enable();
+            }
+            else
+            {
+                Disable();
+            }
+        }
+
+        private void Enable()
         {
             foreach (var rigidbody in rigidbodies)
             {
@@ -21,7 +39,7 @@ namespace Enemy.Animation
             }
         }
 
-        public void Disable()
+        private void Disable()
         {
             foreach (var rigidbody in rigidbodies)
             {

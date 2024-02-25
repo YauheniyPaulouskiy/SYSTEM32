@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Ground
   - Enemy
-  - ship
-  - asteroid
   - EnemyWeapon
   - PlayerWeapon
   - Weapon

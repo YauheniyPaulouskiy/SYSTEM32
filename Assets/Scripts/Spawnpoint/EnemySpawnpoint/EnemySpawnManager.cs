@@ -3,6 +3,7 @@ using ObjectPool;
 using Enemy.AI;
 using System.Collections;
 using UnityEngine;
+using GameManager.PauseGame;
 
 namespace Enemy.Spawnpoint
 {
@@ -42,6 +43,11 @@ namespace Enemy.Spawnpoint
 
         private void SpawnEnemy()
         {
+            if (PauseGame.instance._isPaused)
+            {
+                return;
+            }
+
             var a = Random.Range(1, _enemySpawnpoint.Length);
             var enemyObject = _enemyPool.Get();
             enemyObject.StandUp();
@@ -73,6 +79,7 @@ namespace Enemy.Spawnpoint
             enemyMove.gameObject.SetActive(false);
         }
 
+        #region [Timer]
         private IEnumerator SpawnTimer()
         {
             while (true)
@@ -82,5 +89,6 @@ namespace Enemy.Spawnpoint
                 SpawnEnemy();
             }
         }
+        #endregion
     }
 }

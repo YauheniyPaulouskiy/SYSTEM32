@@ -1,6 +1,7 @@
+using GameManager.PauseGame;
 using Player.Controller;
+using Player.Death;
 using UnityEngine;
-using Zenject;
 
 namespace Player.Camera
 {
@@ -9,12 +10,13 @@ namespace Player.Camera
         [Header("Sensetivity Value")]
         [SerializeField] private float _mouseSensetivity;
 
-        [Header("Min/Max Rotation Angle")]
+        [Header("Rotation Angle Value")]
         [SerializeField] private Vector2 _minMaxHorizontalAngle;
 
         [Header("Player Rotation Object")]
         [SerializeField] private PlayerRotation _playerRotation;
 
+        private Vector3 _scaleRotation;
         private float _xRotation;
 
         private PlayerInputs _playerInputs;
@@ -39,20 +41,31 @@ namespace Player.Camera
 
         private void Update()
         {
+            if (PauseGame.instance._isPaused)
+            {
+                return;
+            }
+
             Rotation();
         }
 
         private void Rotation()
         {
-            var inputsRotation = _playerInputs.Player.Rotation.ReadValue<Vector2>();
-            var scaleRotation = inputsRotation * _mouseSensetivity * Time.deltaTime;
-
-            _xRotation -= scaleRotation.y;
-            _xRotation = Mathf.Clamp(_xRotation, _minMaxHorizontalAngle.x, _minMaxHorizontalAngle.y);
+            
+            CalcRotation();
 
             transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
 
-            _playerRotation.Rotation(scaleRotation.x);
+            _playerRotation.Rotation(_scaleRotation.x);
+        }
+
+        private void CalcRotation()
+        {
+            var inputsRotation = _playerInputs.Player.Rotation.ReadValue<Vector2>();
+            _scaleRotation = inputsRotation * _mouseSensetivity * Time.deltaTime;
+
+            _xRotation -= _scaleRotation.y;
+            _xRotation = Mathf.Clamp(_xRotation, _minMaxHorizontalAngle.x, _minMaxHorizontalAngle.y);
         }
     }
 }

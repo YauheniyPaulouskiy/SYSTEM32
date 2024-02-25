@@ -388,7 +388,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da935731b3d51b7478087f9a97ad870e, type: 2}
+  - {fileID: 2100000, guid: 555805cfd6aac4041a4637e95b654cd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1747,9 +1747,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.2
   m_Speed: 5
-  m_Acceleration: 3
+  m_Acceleration: 180
   avoidancePriority: 50
-  m_AngularSpeed: 360
+  m_AngularSpeed: 180
   m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
@@ -1791,9 +1791,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21cf01cc91e527c4b96798dd4cfbaa5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 5
+  _maxDistanceFromPlayer: 2
+  _originOffset: 1
+  _timerSeconds: 3
   _player: {fileID: 0}
   _swordTriggerZone: {fileID: 7386229072357158558}
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 8
   DeathEnemy:
     m_PersistentCalls:
       m_Calls: []
@@ -2935,7 +2940,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da935731b3d51b7478087f9a97ad870e, type: 2}
+  - {fileID: 2100000, guid: 555805cfd6aac4041a4637e95b654cd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3538,7 +3543,7 @@ PrefabInstance:
     - target: {fileID: 5274172229959188495, guid: 2352abcede327e543907b5e10a0c5efd,
         type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5274172229959188495, guid: 2352abcede327e543907b5e10a0c5efd,
         type: 3}
@@ -3549,11 +3554,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 09a4cc3cf72f4b649851dcf4676d32ee, type: 2}
+      objectReference: {fileID: 2100000, guid: bf07c5e03b5df534db18754fafe3ae78, type: 2}
     - target: {fileID: 5274172230962075052, guid: 2352abcede327e543907b5e10a0c5efd,
         type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5274172230962075052, guid: 2352abcede327e543907b5e10a0c5efd,
+        type: 3}
+      propertyPath: m_TagString
+      value: EnemyWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 5274172230962432396, guid: 2352abcede327e543907b5e10a0c5efd,
         type: 3}
