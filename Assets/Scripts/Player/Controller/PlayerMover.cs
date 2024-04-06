@@ -6,28 +6,26 @@ namespace Player.Controller
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent (typeof(CapsuleCollider))]
-    [RequireComponent (typeof(PlayerAnimation))]
     public class PlayerMover : MonoBehaviour
     {
         [Header("Speed Value")]
-        [SerializeField] private float _initialFrontSpeed;
+        [SerializeField] private float _minSpeed;
         [SerializeField] private float _maxFrontSpeed;
         [SerializeField] private float _playerFrontAcceleration;
-        [SerializeField] private float _initialSideAndRearSpeed;
 
         [Header("Jump Value")]
         [SerializeField] private float _jumpForce;
 
-        [Header("Raycast Value")]
-        [SerializeField] private float _raycastMaxDistance;
+        [Header("GroundCheck Raycast Value")]
+        [SerializeField] private float _rayLength;
         [SerializeField] private float _originOffset;
 
         [Header("Ground Mask")]
         [SerializeField] private LayerMask _groundMask;
 
-        private float _speed;
+        private float _playerCurrentSpeed;
         private float _playerMass;
-        private float _playerRadius;
+        private float _playerBodyRadius;
         private Vector3 _scaleDirection;     
         private bool _onGround;
 
@@ -36,7 +34,7 @@ namespace Player.Controller
         private PlayerAnimation _playerAnimation;
 
         private PlayerInputs _playerInputs;
-        
+
         #region [Initialization]
         private void Awake()
         {
@@ -59,7 +57,7 @@ namespace Player.Controller
         private void Start()
         {
             _playerMass = _rigidbody.mass;
-            _playerRadius = gameObject.GetComponent<CapsuleCollider>().radius;
+            _playerBodyRadius = gameObject.GetComponent<CapsuleCollider>().radius;
         }
 
         private void FixedUpdate()
@@ -74,11 +72,8 @@ namespace Player.Controller
 
         private void ApplayGround()
         {
-            if (GroundCheck())
-            {
-                Move();
-                Jump();
-            }
+            Move();
+            Jump();
         }
 
         private void Move()
@@ -89,7 +84,7 @@ namespace Player.Controller
 
         private void Jump()
         {
-            if (_playerInputs.Player.Jump.ReadValue<float>() > 0)
+            if (_playerInputs.Player.Jump.ReadValue<float>() > 0 && GroundCheck())
             {
                 _rigidbody.AddForce(Vector3.up * _jumpForce * _playerMass, ForceMode.Impulse);
             }
@@ -108,7 +103,7 @@ namespace Player.Controller
 
             if (inputsDirection == Vector2.zero)
             {
-                _speed = 0f;
+                _playerCurrentSpeed = 0f;
                 _scaleDirection = Vector3.zero;
                 _rigidbody.velocity = new Vector3(0f, _rigidbody.velocity.y, 0f);
 
@@ -118,30 +113,43 @@ namespace Player.Controller
             ChangeSpeed(inputsDirection);
 
             var moveDirection = transform.right * inputsDirection.x + transform.forward * inputsDirection.y;
-            _scaleDirection = moveDirection * _playerMass * (_speed * Time.deltaTime);   
+            _scaleDirection = moveDirection * _playerMass * (_playerCurrentSpeed * Time.deltaTime);   
         }
 
         private void ChangeSpeed(Vector2 inputsDirection)
         {
             if (inputsDirection.y > 0 && inputsDirection.x == 0)
             {
-                _speed += _playerFrontAcceleration * Time.deltaTime;
-                _speed = Mathf.Clamp(_speed, _initialFrontSpeed, _maxFrontSpeed);
+                _playerCurrentSpeed += _playerFrontAcceleration * Time.deltaTime;
+                _playerCurrentSpeed = Mathf.Clamp(_playerCurrentSpeed, _minSpeed, _maxFrontSpeed);
             }
             else
             {
-                _speed = _initialSideAndRearSpeed;
+                _playerCurrentSpeed = _minSpeed;
             }
+        }
+
+        private Vector3 CurrentPlayerPosition()
+        {
+            var curPosition = transform.position;
+            curPosition.y += _originOffset;
+
+            return curPosition;
+        }
+
+        private Vector3 BoxCastSizi()
+        {
+            var size = Vector3.one * _playerBodyRadius;
+            return size;
         }
 
         private bool GroundCheck()
         {
-            var curPosition = transform.position;
-            curPosition.y +=_originOffset;
+            var halfSize = BoxCastSizi() / 2;
             var direction = -Vector3.up;
-            var maxDistance = _raycastMaxDistance + _originOffset;
+            var playerRotation = transform.rotation;
 
-            _onGround = Physics.Raycast(curPosition, direction, maxDistance, _groundMask);
+            _onGround = Physics.BoxCast(CurrentPlayerPosition(), halfSize, direction, playerRotation, _rayLength, _groundMask);
 
             return _onGround;
         }

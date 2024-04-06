@@ -2,10 +2,13 @@ using System.Collections;
 using UI.Text;
 using UnityEngine;
 using GameManager.PauseGame;
+using Zenject;
+using Player.Controller;
+using Player.Death;
 
 namespace Player.UI
 {
-    public class PlayerDeathScreen : MonoBehaviour, IPausedFromDeathHandler
+    public class PlayerDeathScreen : MonoBehaviour
     {
         [SerializeField] private float _secondTimers;
 
@@ -13,15 +16,23 @@ namespace Player.UI
         [SerializeField] private ScrambleText _deathText;
         [SerializeField] private Transform _exitButton;
 
+        private PlayerDeath _player;
+
         #region[Initialization]
         private void OnEnable()
         {
-            PauseGame.instance.AddList(this);
+            _player.DeathPlayer.AddListener(Activate);
         }
 
         private void OnDisable()
         {
-            PauseGame.instance.RemoveList(this);
+            _player.DeathPlayer.RemoveListener(Activate);
+        }
+
+        [Inject]
+        private void Container(PlayerMover player)
+        {
+            _player = player.GetComponent<PlayerDeath>();
         }
         #endregion
 
@@ -31,26 +42,20 @@ namespace Player.UI
             _exitButton.gameObject.SetActive(false);
         }
 
-        private void Activate(bool isPausedFromDeath)
+        private void Activate()
         {
-            if (isPausedFromDeath)
-            {
-                _deathBackground.gameObject.SetActive(isPausedFromDeath);
-                _deathText.StartAnimation();
-                StartCoroutine(ActivateExitButtonRutine(isPausedFromDeath));
-            }          
+            var isPaused = PauseGame.instance._isPaused;
+
+            _deathBackground.gameObject.SetActive(isPaused);
+            _deathText.StartAnimation();
+            StartCoroutine(ActivateExitButtonRutine(isPaused));      
         }
 
-        private IEnumerator ActivateExitButtonRutine(bool isPausedFromDeath)
+        private IEnumerator ActivateExitButtonRutine(bool isPaused)
         {
             var waitForSeconds = _deathText.GetTimeDuration() + _secondTimers;
             yield return new WaitForSeconds(waitForSeconds);
-            _exitButton.gameObject.SetActive(isPausedFromDeath);
-        }
-
-        public void IsPausedFromDeath(bool isPausedFromDeath)
-        {
-            Activate(isPausedFromDeath);
+            _exitButton.gameObject.SetActive(isPaused);
         }
     }
 }

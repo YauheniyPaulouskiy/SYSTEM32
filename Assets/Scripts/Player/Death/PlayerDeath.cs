@@ -74,8 +74,9 @@ namespace Player.Death
         {
             if (!_isDeath) 
             {
-                _isDeath = true;
-                PauseGame.instance.SetPause(true, true);
+                _isDeath = true;       
+                PauseGame.instance.SetPause(true);
+                DeathPlayer.Invoke();
             }           
         }
 

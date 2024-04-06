@@ -27,13 +27,8 @@ namespace GameManager
 
         private void Menu()
         {
-            if (PauseGame.PauseGame.instance._isPausedFromDeath)
-            {
-                return;
-            }
-
             var isPaused = PauseGame.PauseGame.instance._isPaused;
-            PauseGame.PauseGame.instance.SetPause(!isPaused, false);
+            PauseGame.PauseGame.instance.SetPause(!isPaused);
         }
     }
 }

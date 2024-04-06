@@ -185,12 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df198c338beb04b4682cd3a301fe4cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialFrontSpeed: 5
+  _minSpeed: 5
   _maxFrontSpeed: 10
   _playerFrontAcceleration: 3
-  _initialSideAndRearSpeed: 3
   _jumpForce: 3
-  _raycastMaxDistance: 0.1
+  _rayLength: 0.1
   _originOffset: 0.1
   _groundMask:
     serializedVersion: 2

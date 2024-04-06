@@ -32,7 +32,7 @@ namespace Menu.UI
 
         public void ResumeGame()
         {
-            PauseGame.instance.SetPause(false, false);
+            PauseGame.instance.SetPause(false);
         }
 
         public void ExitGame()
